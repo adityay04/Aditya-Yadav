@@ -1,0 +1,263 @@
+{% comment %}
+  Custom Banner Section
+  All text in red rectangles should be editable from the customizer
+  Buttons should have animation
+{% endcomment %}
+
+<div class="custom-banner-section" data-section-id="{{ section.id }}">
+  <div class="banner-container">
+    <div class="banner-content">
+      {% if section.settings.heading != blank %}
+        <h1 class="banner-heading">{{ section.settings.heading }}</h1>
+      {% endif %}
+      
+      {% if section.settings.subheading != blank %}
+        <p class="banner-subheading">{{ section.settings.subheading }}</p>
+      {% endif %}
+      
+      {% if section.settings.description != blank %}
+        <p class="banner-description">{{ section.settings.description }}</p>
+      {% endif %}
+      
+      <div class="banner-buttons">
+        {% if section.settings.button_1_text != blank %}
+          <a href="{{ section.settings.button_1_link }}" class="banner-btn banner-btn-primary">
+            {{ section.settings.button_1_text }}
+          </a>
+        {% endif %}
+        
+        {% if section.settings.button_2_text != blank %}
+          <a href="{{ section.settings.button_2_link }}" class="banner-btn banner-btn-secondary">
+            {{ section.settings.button_2_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Banner Section Styles */
+  .custom-banner-section {
+    width: 100%;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .banner-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .banner-content {
+    text-align: center;
+    color: white;
+  }
+  
+  .banner-heading {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.2;
+    animation: fadeInUp 0.8s ease-out;
+  }
+  
+  .banner-subheading {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    opacity: 0.95;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+  }
+  
+  .banner-description {
+    font-size: 16px;
+    max-width: 600px;
+    margin: 0 auto 32px;
+    opacity: 0.9;
+    line-height: 1.6;
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+  }
+  
+  .banner-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.8s ease-out 0.6s both;
+  }
+  
+  /* Button Styles with Animation */
+  .banner-btn {
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .banner-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+  
+  .banner-btn:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .banner-btn span {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .banner-btn-primary {
+    background-color: #ffffff;
+    color: #667eea;
+    border: 2px solid #ffffff;
+  }
+  
+  .banner-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .banner-btn-secondary {
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+  }
+  
+  .banner-btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Mobile Responsive */
+  @media screen and (max-width: 768px) {
+    .custom-banner-section {
+      padding: 60px 16px;
+    }
+    
+    .banner-heading {
+      font-size: 32px;
+    }
+    
+    .banner-subheading {
+      font-size: 18px;
+    }
+    
+    .banner-description {
+      font-size: 14px;
+    }
+    
+    .banner-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .banner-btn {
+      width: 100%;
+      max-width: 280px;
+      text-align: center;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .banner-heading {
+      font-size: 28px;
+    }
+    
+    .banner-subheading {
+      font-size: 16px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Custom Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Welcome to Our Store"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Discover Amazing Products"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Shop the latest trends and find everything you need in one place"
+    },
+    {
+      "type": "header",
+      "content": "Button 1"
+    },
+    {
+      "type": "text",
+      "id": "button_1_text",
+      "label": "Button 1 Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Button 1 Link"
+    },
+    {
+      "type": "header",
+      "content": "Button 2"
+    },
+    {
+      "type": "text",
+      "id": "button_2_text",
+      "label": "Button 2 Text",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Button 2 Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Banner"
+    }
+  ]
+}
+{% endschema %}
